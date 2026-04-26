@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Shippori+Mincho:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --gold: #d4af37; --main-dark: #1a1a1a; --bg: #fdfbf7; --accent: #2c3e50; --green: #27ae60; }
+        :root { --gold: #d4af37; --main-dark: #1a1a1a; --bg: #fdfbf7; --green: #27ae60; }
         body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg); color: #333; margin: 0; line-height: 1.6; }
         header {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.ataminews.gr.jp/storage/post_picture/[640_640]_20250115115602_FOREST%E2%91%A0.jpg');
@@ -16,168 +16,116 @@
         }
         .anniversary-text { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--gold); margin: 0; }
         .container { max-width: 800px; margin: -40px auto 50px; padding: 0 20px; position: relative; z-index: 10; }
-        
-        .photo-gallery { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
-        .polaroid { background: white; padding: 10px 10px 25px; box-shadow: 0 8px 15px rgba(0,0,0,0.1); transform: rotate(-2deg); width: 140px; border: 1px solid #eee; transition: 0.3s; }
-        .polaroid:nth-child(even) { transform: rotate(2deg); }
-        .polaroid img { width: 100%; height: 100px; object-fit: cover; }
-
+        .polaroid { background: white; padding: 10px 10px 25px; box-shadow: 0 8px 15px rgba(0,0,0,0.1); transform: rotate(-2deg); width: 140px; border: 1px solid #eee; transition: 0.3s; margin-bottom: 20px; }
         .weather-card { background: white; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 25px; border-left: 5px solid #3498db; display: flex; justify-content: space-around; font-size: 0.85rem; }
-        .weather-item strong { display: block; color: #3498db; margin-bottom: 5px; }
-
         .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 25px; }
         .tab-btn { background: white; border: 1px solid #ddd; padding: 12px 18px; border-radius: 30px; cursor: pointer; font-weight: bold; color: #777; transition: 0.3s; font-size: 0.85rem; }
         .tab-btn.active { background: var(--main-dark); color: white; border-color: var(--main-dark); }
-
         .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 25px; border-top: 4px solid var(--gold); }
-        .card-header { background: #fcfcfc; padding: 15px 20px; font-weight: bold; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-        .card-body { padding: 20px 25px; }
-        
+        .card-header { background: #fcfcfc; padding: 15px 20px; font-weight: bold; border-bottom: 1px solid #eee; }
         .day-label { display: inline-block; background: var(--main-dark); color: white; padding: 2px 10px; border-radius: 3px; font-size: 0.75rem; margin-bottom: 10px; }
         .day-title { font-family: 'Shippori Mincho', serif; color: var(--gold); font-size: 1.2rem; margin: 0 0 15px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-
         .time-row { display: flex; margin-bottom: 15px; border-left: 2px solid var(--gold); padding-left: 15px; position: relative; }
         .time-row::before { content: ''; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; position: absolute; left: -5px; top: 8px; }
         .time { min-width: 65px; font-weight: bold; color: var(--gold); font-size: 0.9rem; }
-        .desc strong { display: block; font-size: 1rem; margin-bottom: 3px; }
-        .desc p { margin: 0; color: #666; font-size: 0.85rem; }
-
-        .map-nav-btn { display: flex; align-items: center; justify-content: center; background: #4285F4; color: white; text-decoration: none; padding: 12px; border-radius: 6px; font-weight: bold; margin-top: 15px; font-size: 0.9rem; }
-        .map-nav-btn i { margin-right: 10px; }
+        .map-nav-btn { display: flex; align-items: center; justify-content: center; background: #4285F4; color: white; text-decoration: none; padding: 12px; border-radius: 6px; font-weight: bold; margin-top: 15px; }
         .ok-btn { width: 100%; background: var(--green); color: white; border: none; padding: 15px; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 15px; }
-        
-        footer { text-align: center; padding: 30px; color: #aaa; font-size: 0.8rem; }
     </style>
 </head>
 <body>
-
 <header>
     <div class="anniversary-text">21st Anniversary Celebration</div>
-    <h1>熱海倶楽部 迎賓館 への旅</h1>
+    <h1 style="font-family:'Shippori Mincho';">熱海倶楽部 迎賓館 への旅</h1>
     <p>2026.04.30 - 05.01 | Luxury Drive</p>
 </header>
-
 <div class="container">
-    <div id="photo-area" class="photo-gallery"></div>
-
-    <div class="weather-card" id="weather-box">
-        <div class="weather-item"><strong>4/30 (Thu)</strong><span id="w1">読み込み中...</span></div>
-        <div class="weather-item"><strong>5/1 (Fri)</strong><span id="w2">読み込み中...</span></div>
+    <div id="photo-area" style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:30px;"></div>
+    <div class="weather-card">
+        <div><strong>4/30</strong><br><span id="w1">読み込み中...</span></div>
+        <div><strong>5/1</strong><br><span id="w2">読み込み中...</span></div>
     </div>
-
     <div class="tabs">
         <button class="tab-btn active" onclick="showPlan('planA', this)">Plan A<br>箱根・富士</button>
         <button class="tab-btn" onclick="showPlan('planB', this)">Plan B<br>伊豆・自然</button>
-        <button class="tab-btn" onclick="showPlan('planC', this)">Plan C<br>文化・小田原</button>
+        <button class="tab-btn" onclick="showPlan('planC', this)">Plan C<br>小田原・文化</button>
         <button class="tab-btn" onclick="showPlan('planD', this)">Plan D<br>三島・体験</button>
     </div>
 
     <div id="planA" class="plan-content active">
-        <div class="card">
-            <div class="card-header"><span>Plan A：箱根・ターンパイク絶景ルート</span></div>
-            <div class="card-body">
-                <span class="day-label">Day 1</span>
-                <div class="day-title">新緑のターンパイクを抜けて</div>
-                <div class="time-row"><div class="time">10:00</div><div class="desc"><strong>自宅 出発</strong><p>小田原厚木道路から絶景のターンパイク箱根へ。</p></div></div>
-                <div class="time-row"><div class="time">12:30</div><div class="desc"><strong>大観山（だいかんざん）ランチ</strong><p>標高1011mからの富士山。スカイラウンジで一服。</p></div></div>
-                <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館チェックイン</strong><p>70平米の極上空間で源泉に浸る。</p></div></div>
-                
-                <span class="day-label">Day 2</span>
-                <div class="day-title">箱根を遊び尽くす1日</div>
-                <div class="time-row"><div class="time">11:00</div><div class="desc"><strong>出発</strong><p>十国峠を越え、箱根神社へ安全祈願。</p></div></div>
-                <div class="time-row"><div class="time">13:30</div><div class="desc"><strong>芦ノ湖・強羅ランチ</strong><p>湖畔のレストラン、または「豆腐かつ煮」の強羅へ。</p></div></div>
-                <div class="time-row"><div class="time">15:30</div><div class="desc"><strong>大涌谷 ＆ 彫刻の森</strong><p>噴煙地で黒たまご、またはアートな森を散策。</p></div></div>
-                
-                <a href="https://www.google.com/maps/dir/?api=1&origin=品川駅&destination=熱海倶楽部迎賓館&waypoints=アネスト岩田+ターンパイク箱根|大観山スカイラウンジ" target="_blank" class="map-nav-btn"><i class="fa-solid fa-location-arrow"></i> Day 1 のナビを開始</a>
-                <button class="ok-btn" onclick="approvePlan('Plan A')">このプランにする！</button>
-            </div>
-        </div>
+        <div class="card"><div class="card-body">
+            <span class="day-label">Day 1</span><div class="day-title">絶景ターンパイク</div>
+            <div class="time-row"><div class="time">12:30</div><div class="desc"><strong>大観山ランチ</strong><p>富士山を望む絶景スカイラウンジ。</p></div></div>
+            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館チェックイン</strong></div></div>
+            <span class="day-label">Day 2</span><div class="day-title">箱根満喫 ＆ 大涌谷</div>
+            <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>箱根神社 ＆ 芦ノ湖散策</strong></div></div>
+            <div class="time-row"><div class="time">13:00</div><div class="desc"><strong>強羅ランチ</strong></div></div>
+            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>大涌谷の黒たまご</strong></div></div>
+            <a href="https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination=熱海倶楽部+迎賓館&waypoints=アネスト岩田+ターンパイク箱根|大観山展望台" target="_blank" class="map-nav-btn"><i class="fa-solid fa-map"></i> 1日目のナビを開始</a>
+            <button class="ok-btn" onclick="approvePlan('Plan A')">これにする！</button>
+        </div></div>
     </div>
 
     <div id="planB" class="plan-content">
-        <div class="card">
-            <div class="card-header">Plan B：伊豆半島・自然 ＆ アート満喫</div>
-            <div class="card-body">
-                <span class="day-label">Day 1</span><div class="day-title">熱海のアート体験</div>
-                <div class="time-row"><div class="time">12:15</div><div class="desc"><strong>MOA美術館 ＆ ランチ</strong><p>国宝と絶景。宿から最も近いアートの聖地。</p></div></div>
-                <div class="time-row"><div class="time">15:15</div><div class="desc"><strong>迎賓館チェックイン</strong></div></div>
-                
-                <span class="day-label">Day 2</span><div class="day-title">伊豆高原・大自然ハイク</div>
-                <div class="time-row"><div class="time">12:00</div><div class="desc"><strong>大室山 ＆ 城ヶ崎海岸</strong><p>リフトで火口巡り ＆ 断崖絶壁の吊り橋体験。</p></div></div>
-                <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>アカオフォレスト</strong><p>海を見下ろす花の楽園でティータイム。</p></div></div>
-
-                <a href="https://www.google.com/maps/dir/?api=1&origin=品川駅&destination=熱海倶楽部迎賓館&waypoints=MOA美術館" target="_blank" class="map-nav-btn"><i class="fa-solid fa-location-arrow"></i> Day 1 のナビを開始</a>
-                <button class="ok-btn" onclick="approvePlan('Plan B')">このプランにする！</button>
-            </div>
-        </div>
+        <div class="card"><div class="card-body">
+            <span class="day-label">Day 1</span><div class="day-title">アートの熱海</div>
+            <div class="time-row"><div class="time">12:15</div><div class="desc"><strong>MOA美術館 ＆ ランチ</strong><p>絶景ロビーと国宝鑑賞。</p></div></div>
+            <div class="time-row"><div class="time">15:15</div><div class="desc"><strong>迎賓館チェックイン</strong></div></div>
+            <span class="day-label">Day 2</span><div class="day-title">伊豆高原 ＆ 絶壁ハイク</div>
+            <div class="time-row"><div class="time">12:00</div><div class="desc"><strong>大室山（リフトで山頂へ）</strong></div></div>
+            <div class="time-row"><div class="time">14:00</div><div class="desc"><strong>城ヶ崎海岸 吊り橋</strong></div></div>
+            <div class="time-row"><div class="time">16:00</div><div class="desc"><strong>アカオフォレスト</strong></div></div>
+            <a href="https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination=熱海倶楽部+迎賓館&waypoints=MOA美術館" target="_blank" class="map-nav-btn"><i class="fa-solid fa-map"></i> 1日目のナビを開始</a>
+            <button class="ok-btn" onclick="approvePlan('Plan B')">これにする！</button>
+        </div></div>
     </div>
 
     <div id="planC" class="plan-content">
-        <div class="card">
-            <div class="card-header">Plan C：小田原・湯河原・文化探訪</div>
-            <div class="card-body">
-                <span class="day-label">Day 1</span><div class="day-title">城下町と海鮮</div>
-                <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>小田原城 ＆ 早川漁港ランチ</strong><p>歴史散策と漁港の獲れたて地魚を堪能。</p></div></div>
-                <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館チェックイン</strong></div></div>
-                
-                <span class="day-label">Day 2</span><div class="day-title">レトロ熱海 ＆ 湯河原の静寂</div>
-                <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>湯河原万葉公園 ＆ 起雲閣</strong><p>川のせせらぎの中での足湯 ＆ 大正ロマンの邸宅巡り。</p></div></div>
-                <div class="time-row"><div class="time">15:30</div><div class="desc"><strong>熱海銀座 買い出し</strong><p>老舗「釜鶴」で最高の干物をチョイス。</p></div></div>
-
-                <a href="https://www.google.com/maps/dir/?api=1&origin=品川駅&destination=熱海倶楽部迎賓館&waypoints=小田原城|早川漁港" target="_blank" class="map-nav-btn"><i class="fa-solid fa-location-arrow"></i> Day 1 のナビを開始</a>
-                <button class="ok-btn" onclick="approvePlan('Plan C')">このプランにする！</button>
-            </div>
-        </div>
+        <div class="card"><div class="card-body">
+            <span class="day-label">Day 1</span><div class="day-title">小田原城 ＆ 海鮮</div>
+            <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>小田原漁港ランチ ＆ 散策</strong></div></div>
+            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館チェックイン</strong></div></div>
+            <span class="day-label">Day 2</span><div class="day-title">湯河原 ＆ 熱海レトロ</div>
+            <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>湯河原万葉公園 散策</strong></div></div>
+            <div class="time-row"><div class="time">13:30</div><div class="desc"><strong>起雲閣（大正ロマンの邸宅）</strong></div></div>
+            <div class="time-row"><div class="time">15:30</div><div class="desc"><strong>熱海銀座 買い出し</strong></div></div>
+            <a href="https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination=熱海倶楽部+迎賓館&waypoints=小田原漁港|小田原城" target="_blank" class="map-nav-btn"><i class="fa-solid fa-map"></i> 1日目のナビを開始</a>
+            <button class="ok-btn" onclick="approvePlan('Plan C')">これにする！</button>
+        </div></div>
     </div>
 
     <div id="planD" class="plan-content">
-        <div class="card">
-            <div class="card-header">Plan D：三島スイーツ ＆ アクティブ富士</div>
-            <div class="card-body">
-                <span class="day-label">Day 1</span><div class="day-title">三島の水の都を巡る</div>
-                <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>TAMAGOYA ＆ 三嶋大社</strong><p>絶品パンケーキランチ ＆ 厳かなパワースポット。</p></div></div>
-                <div class="time-row"><div class="time">15:30</div><div class="desc"><strong>迎賓館チェックイン</strong></div></div>
-                
-                <span class="day-label">Day 2</span><div class="day-title">絶叫 ＆ 驚きの深海</div>
-                <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>三島スカイウォーク</strong><p>日本最長の吊り橋。富士山の眺望は圧巻。</p></div></div>
-                <div class="time-row"><div class="time">14:00</div><div class="desc"><strong>沼津港 ＆ 深海水族館</strong><p>賑やかな港ランチと、世界初の深海魚水族館。</p></div></div>
-
-                <a href="https://www.google.com/maps/dir/?api=1&origin=品川駅&destination=熱海倶楽部迎賓館&waypoints=たまご専門店+TAMAGOYA|三嶋大社" target="_blank" class="map-nav-btn"><i class="fa-solid fa-location-arrow"></i> Day 1 のナビを開始</a>
-                <button class="ok-btn" onclick="approvePlan('Plan D')">このプランにする！</button>
-            </div>
-        </div>
+        <div class="card"><div class="card-body">
+            <span class="day-label">Day 1</span><div class="day-title">三島の水とスイーツ</div>
+            <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>TAMAGOYA ＆ 三嶋大社</strong></div></div>
+            <div class="time-row"><div class="time">15:30</div><div class="desc"><strong>迎賓館チェックイン</strong></div></div>
+            <span class="day-label">Day 2</span><div class="day-title">空の散歩 ＆ 深海体験</div>
+            <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>三島スカイウォーク</strong></div></div>
+            <div class="time-row"><div class="time">14:00</div><div class="desc"><strong>沼津港 ＆ 深海水族館</strong></div></div>
+            <a href="https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination=熱海倶楽部+迎賓館&waypoints=TAMAGOYA|三嶋大社" target="_blank" class="map-nav-btn"><i class="fa-solid fa-map"></i> 1日目のナビを開始</a>
+            <button class="ok-btn" onclick="approvePlan('Plan D')">これにする！</button>
+        </div></div>
     </div>
 </div>
-
-<footer>
-    <p>Happy 21st Wedding Anniversary. <br>これからも、素敵な時間を重ねていきましょう。</p>
-</footer>
+<footer><p>Happy 21st Wedding Anniversary.</p></footer>
 
 <script>
-    const GAS_URL = "あなたのGASウェブアプリURL";
-
+    const GAS_URL = "あなたのウェブアプリURLをここに";
     function showPlan(id, btn) {
         document.querySelectorAll('.plan-content').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         btn.classList.add('active');
     }
-
     async function approvePlan(name) {
-        if (!confirm(name + " に決めますか？")) return;
+        if (!confirm(name + " にしますか？")) return;
         await fetch(GAS_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({ planName: name }) });
-        alert("旦那様に通知を送りました！楽しみですね。");
+        alert("旦那様に通知を送りました！");
     }
-
     async function loadData() {
         try {
-            // 写真取得
             const pRes = await fetch(GAS_URL + "?action=getPhotos");
             const photos = await pRes.json();
-            const selected = photos.sort(() => 0.5 - Math.random()).slice(0, 3);
-            document.getElementById('photo-area').innerHTML = selected.map(p => `<div class="polaroid"><img src="${p.url}"></div>`).join('');
-
-            // 天気取得
+            document.getElementById('photo-area').innerHTML = photos.sort(() => 0.5 - Math.random()).slice(0, 3).map(p => `<div class="polaroid"><img src="${p.url}"></div>`).join('');
             const wRes = await fetch(GAS_URL + "?action=getWeather");
             const w = await wRes.json();
             document.getElementById('w1').innerText = w.day1.telop + " (" + w.day1.temp + ")";
@@ -186,6 +134,5 @@
     }
     loadData();
 </script>
-
 </body>
 </html>
