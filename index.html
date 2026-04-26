@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>21st Anniversary Celebration</title>
+    <title>21st Anniversary - Special Atami Drive</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Shippori+Mincho:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 全ての要素で枠線の計算を内側に含める設定（はみ出し防止の鉄則） */
         * { box-sizing: border-box; }
-
         :root {
             --gold: #d4af37;
             --main-dark: #1a1a1a;
@@ -18,8 +16,7 @@
             --map-blue: #4285F4;
             --card-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
-
-        body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg); color: #333; margin: 0; padding: 0; line-height: 1.8; -webkit-text-size-adjust: 100%; }
+        body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg); color: #333; margin: 0; padding: 0; line-height: 1.8; }
 
         header {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://www.city.atami.lg.jp/_res/projects/default_project/_page_/001/002/651/IMG_3414.JPG');
@@ -27,21 +24,21 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;
         }
         .anniversary-text { font-family: 'Great Vibes', cursive; font-size: clamp(3rem, 10vw, 4.5rem); color: var(--gold); margin: 0; }
-        header h1 { font-family: 'Shippori Mincho', serif; font-size: clamp(1.2rem, 5vw, 1.6rem); margin: 10px 0; }
+        header h1 { font-family: 'Shippori Mincho', serif; font-size: clamp(1.1rem, 4.5vw, 1.5rem); margin: 10px 0; letter-spacing: 0.1em; }
 
         .container { max-width: 850px; margin: -40px auto 60px; padding: 0 15px; position: relative; z-index: 10; }
 
-        /* Polaroid Gallery (Fixed 3 images) */
+        /* Polaroid Gallery */
         .photo-gallery { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-        .polaroid { background: white; padding: 8px 8px 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); width: clamp(100px, 28vw, 160px); border: 1px solid #eee; transform: rotate(-1deg); }
-        .polaroid img { width: 100%; height: 100px; object-fit: cover; }
+        .polaroid { background: white; padding: 8px 8px 18px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); width: clamp(100px, 28vw, 160px); border: 1px solid #eee; }
+        .polaroid img { width: 100%; height: 90px; object-fit: cover; }
 
         /* Weather Card */
         .weather-card {
-            background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 25px;
+            background: white; border-radius: 15px; box-shadow: var(--card-shadow); padding: 15px; margin-bottom: 25px;
             border-left: 8px solid #e74c3c; display: flex; justify-content: space-around; align-items: center;
         }
-        .rain-msg { color: #e74c3c; font-weight: bold; font-size: 0.8rem; }
+        .rain-msg { color: #e74c3c; font-weight: bold; font-size: 0.75rem; }
 
         /* Tab Navigation */
         .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 20px; }
@@ -51,35 +48,34 @@
         }
         .tab-btn.active { background: var(--main-dark); color: white; border-color: var(--main-dark); }
 
-        /* Plan Content - Display Control */
+        /* Plan Content Control */
         .plan-content { display: none; }
         .plan-content.active { display: block !important; animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: var(--card-shadow); margin-bottom: 30px; border-top: 5px solid var(--gold); width: 100%; }
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: var(--card-shadow); margin-bottom: 30px; border-top: 5px solid var(--gold); }
         .card-body { padding: 20px; }
         .day-title { font-family: 'Shippori Mincho', serif; color: var(--gold); border-bottom: 1px solid #eee; padding-bottom: 5px; margin: 25px 0 15px; font-size: 1.2rem; }
         
-        .time-row { display: flex; margin-bottom: 15px; border-left: 2px solid var(--gold); padding-left: 12px; }
+        .time-row { display: flex; margin-bottom: 18px; border-left: 2px solid var(--gold); padding-left: 12px; }
         .time { min-width: 55px; font-weight: bold; color: var(--gold); font-size: 0.85rem; }
         .desc strong { display: block; font-size: 1rem; color: #222; }
-        .desc p { margin: 5px 0 0; color: #555; font-size: 0.9rem; }
+        .desc p { margin: 5px 0 0; color: #555; font-size: 0.85rem; }
+        
+        .info-link { display: inline-block; margin-top: 5px; color: var(--map-blue); text-decoration: none; font-size: 0.8rem; font-weight: bold; }
+        .info-link:after { content: ' \f35d'; font-family: "Font Awesome 6 Free"; font-weight: 900; }
 
-        /* Google Maps Button */
+        /* Map & OK Buttons */
         .map-btn {
             display: flex; align-items: center; justify-content: center; background-color: var(--map-blue); color: white !important;
             text-decoration: none; padding: 16px; border-radius: 10px; font-weight: 700; margin: 20px 0; font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(66,133,244,0.3); width: 100%;
+            box-shadow: 0 4px 10px rgba(66,133,244,0.3);
         }
-        .map-btn i { margin-right: 10px; }
-
-        /* Fixed Decision Button (No Overflow) */
         .ok-btn {
             width: 100%; background-color: var(--success-green) !important; color: white !important;
             border: none; padding: 18px; border-radius: 10px; font-size: 1.1rem; font-weight: 700;
             display: block; text-align: center; text-decoration: none; margin-top: 25px;
             box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
-            cursor: pointer;
         }
 
         footer { text-align: center; padding: 40px; color: #999; font-size: 0.8rem; }
@@ -110,56 +106,68 @@
 
     <div id="planA" class="plan-content active">
         <div class="card"><div class="card-body">
-            <div class="day-title">Day 1：雨に濡れる森と名画</div>
-            <div class="time-row"><div class="time">10:00</div><div class="desc"><strong>西大井 出発</strong><p>二人で選んだ曲を流してドライブ開始。</p></div></div>
-            <div class="time-row"><div class="time">12:15</div><div class="desc"><strong>ポーラ美術館 ＆ ランチ</strong><p>ガラス張りの建築。雨の森を室内から眺めながらフレンチを堪能。</p></div></div>
-            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館 到着</strong><p>15時ぴったりにチェックイン。自家源泉の温泉へ直行。</p></div></div>
-            <div class="day-title">Day 2：ガラスの煌めき</div>
-            <div class="time-row"><div class="time">11:00</div><div class="desc"><strong>出発</strong><p>11時まで温泉を楽しみ出発。</p></div></div>
-            <div class="time-row"><div class="time">12:00</div><div class="desc"><strong>箱根ガラスの森美術館</strong><p>雨とガラスの共鳴。室内で優雅なティータイム。</p></div></div>
-            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>箱根ハイランドホテル ランチ</strong><p>夕暮れの山を眺め、18時頃帰路へ。</p></div></div>
-            <a href="https://www.google.com/maps/dir/西大井駅/ポーラ美術館/熱海倶楽部+迎賓館" target="_blank" class="map-btn"><i class="fa-solid fa-map"></i> Googleマップで全行程をナビ</a>
-            <button class="ok-btn" onclick="approvePlan('Plan A')">このプランに決定！</button>
+            <div class="day-title">Day 1：雨に濡れる森の美術館巡り</div>
+            <div class="time-row"><div class="time">10:00</div><div class="desc"><strong>西大井 出発</strong><p>落ち着いたBGMと共に、箱根の山へドライブ開始。</p></div></div>
+            <div class="time-row"><div class="time">12:15</div><div class="desc"><strong>ポーラ美術館 ＆ ランチ</strong><p>全面ガラス張りの建築。雨の森を室内から眺めながらフレンチを。<br>
+                <a href="https://www.polamuseum.or.jp/" target="_blank" class="info-link">ポーラ美術館 公式サイト</a></p></div></div>
+            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館 到着</strong><p>15時ぴったりにチェックイン。極上スイートの温泉へ。<br>
+                <a href="https://www.atami-club.com/geihinkan/" target="_blank" class="info-link">熱海倶楽部 迎賓館 公式サイト</a></p></div></div>
+            <div class="day-title">Day 2：5/1 ガラスのアートと帰路</div>
+            <div class="time-row"><div class="time">11:00</div><div class="desc"><strong>出発</strong><p>11時まで温泉を楽しみ出発。雨でも美しいスポットへ。</p></div></div>
+            <div class="time-row"><div class="time">12:00</div><div class="desc"><strong>箱根ガラスの森美術館</strong><p>雨粒がガラスと共鳴して輝く。生演奏を聴きながらティータイム。<br>
+                <a href="https://www.hakone-garasunomori.jp/" target="_blank" class="info-link">ガラスの森 公式サイト</a></p></div></div>
+            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>箱根ハイランドホテル ランチ</strong><p>雨に煙る箱根の山を窓から眺めながら。18時頃帰路へ。</p></div></div>
+            <a href="https://www.google.com/maps/dir/?api=1&origin=西大井駅&destination=熱海倶楽部迎賓館&waypoints=ポーラ美術館" target="_blank" class="map-btn"><i class="fa-solid fa-route"></i> Googleマップでルートを確認</a>
+            <a href="#" class="ok-btn" onclick="approvePlan('Plan A')">このプランに決定！</a>
         </div></div>
     </div>
 
     <div id="planB" class="plan-content">
         <div class="card"><div class="card-body">
             <div class="day-title">Day 1：熱海の「室内」最高峰へ</div>
-            <div class="time-row"><div class="time">12:00</div><div class="desc"><strong>MOA美術館 ＆ ランチ</strong><p>国宝と絶景。雨でも美しく輝く館内レストランで特製ランチ。</p></div></div>
-            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館 到着</strong><p>移動を最小限に、宿の静寂を15時から味わいます。</p></div></div>
-            <div class="day-title">Day 2：レトロ邸宅と熱海銀座</div>
-            <div class="time-row"><div class="time">11:00</div><div class="desc"><strong>出発</strong><p>11時まで温泉を楽しみ出発。</p></div></div>
-            <div class="time-row"><div class="time">12:00</div><div class="desc"><strong>熱海トリックアート迷宮館</strong><p>完全室内。雨を気にせず21周年の笑える記念写真を。</p></div></div>
-            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>茶寮「五色」</strong><p>屋根付き茶寮で名物スイーツ。18時頃帰路へ。</p></div></div>
-            <a href="https://www.google.com/maps/dir/西大井駅/MOA美術館/熱海倶楽部+迎賓館" target="_blank" class="map-btn"><i class="fa-solid fa-map"></i> Googleマップで全行程をナビ</a>
-            <button class="ok-btn" onclick="approvePlan('Plan B')">このプランに決定！</button>
+            <div class="time-row"><div class="time">12:00</div><div class="desc"><strong>MOA美術館 ＆ ランチ</strong><p>国宝と相模湾のパノラマ。雨でも美しい館内レストランで特製ランチ。<br>
+                <a href="https://www.moaart.or.jp/" target="_blank" class="info-link">MOA美術館 公式サイト</a></p></div></div>
+            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館 到着</strong><p>移動距離最短。お部屋で二人だけの贅沢な時間を開始。<br>
+                <a href="https://www.atami-club.com/geihinkan/" target="_blank" class="info-link">熱海倶楽部 迎賓館 公式サイト</a></p></div></div>
+            <div class="day-title">Day 2：5/1 トリックアート ＆ 絶景茶寮</div>
+            <div class="time-row"><div class="time">11:00</div><div class="desc"><strong>出発</strong><p>温泉を楽しみ、11時に出発。</p></div></div>
+            <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>熱海トリックアート迷宮館</strong><p>完全室内。21周年の笑える記念写真をたくさん撮りましょう。<br>
+                <a href="http://atami-trickart.com/" target="_blank" class="info-link">トリックアート 公式サイト</a></p></div></div>
+            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>來宮神社 ＆ 茶寮「五色」</strong><p>屋根付きの茶寮で名物スイーツ。雨の楠を眺め、18時頃帰路へ。</p></div></div>
+            <a href="https://www.google.com/maps/dir/?api=1&origin=西大井駅&destination=熱海倶楽部迎賓館&waypoints=MOA美術館" target="_blank" class="map-btn"><i class="fa-solid fa-route"></i> Googleマップでルートを確認</a>
+            <a href="#" class="ok-btn" onclick="approvePlan('Plan B')">このプランに決定！</a>
         </div></div>
     </div>
 
     <div id="planC" class="plan-content">
         <div class="card"><div class="card-body">
-            <div class="day-title">Day 1：小田原の「味」と「体験」</div>
-            <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>鈴廣 かまぼこの里</strong><p>室内で「かまぼこ作り」体験！特製サイダーでランチ。15時宿着。</p></div></div>
-            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館 到着</strong></div></div>
-            <div class="day-title">Day 2：湯河原の「休息」</div>
-            <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>湯河原惣湯 (万葉公園)</strong><p>屋根付きテラスで足湯。雨音を聴きながらティータイム。</p></div></div>
-            <div class="time-row"><div class="time">14:30</div><div class="desc"><strong>起雲閣（きうんかく）</strong><p>雨に映える日本庭園を室内から。17時半頃帰路へ。</p></div></div>
-            <a href="https://www.google.com/maps/dir/西大井駅/鈴廣+かまぼこの里/熱海倶楽部+迎賓館" target="_blank" class="map-btn"><i class="fa-solid fa-map"></i> Googleマップで全行程をナビ</a>
-            <button class="ok-btn" onclick="approvePlan('Plan C')">このプランに決定！</button>
+            <div class="day-title">Day 1：小田原の「技」と「味」</div>
+            <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>鈴廣 かまぼこの里</strong><p>室内で「かまぼこ作り」体験！特製サイダーでランチ。15時宿着。<br>
+                <a href="https://www.kamaboko.com/sato/" target="_blank" class="info-link">鈴廣 公式サイト</a></p></div></div>
+            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館 到着</strong><p><a href="https://www.atami-club.com/geihinkan/" target="_blank" class="info-link">熱海倶楽部 迎賓館 公式サイト</a></p></div></div>
+            <div class="day-title">Day 2：5/1 湯河原の「極み」休息</div>
+            <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>湯河原惣湯 (万葉公園)</strong><p>屋根付きテラスで足湯。雨音を聴きながら贅沢な読書タイムを。<br>
+                <a href="https://yugawarasoyu.jp/" target="_blank" class="info-link">湯河原惣湯 公式サイト</a></p></div></div>
+            <div class="time-row"><div class="time">14:30</div><div class="desc"><strong>起雲閣（きうんかく）</strong><p>雨の日に緑が最も映える歴史邸宅。室内見学も充実。17時半頃帰路へ。<br>
+                <a href="https://www.city.atami.lg.jp/kiunkaku/" target="_blank" class="info-link">起雲閣 公式サイト</a></p></div></div>
+            <a href="https://www.google.com/maps/dir/?api=1&origin=西大井駅&destination=熱海倶楽部迎賓館&waypoints=鈴廣+かまぼこの里" target="_blank" class="map-btn"><i class="fa-solid fa-route"></i> Googleマップでルートを確認</a>
+            <a href="#" class="ok-btn" onclick="approvePlan('Plan C')">このプランに決定！</a>
         </div></div>
     </div>
 
     <div id="planD" class="plan-content">
         <div class="card"><div class="card-body">
-            <div class="day-title">Day 1：三島のスイーツランチ</div>
-            <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>TAMAGOYA</strong><p>雨の日こそ、室内で絶品パンケーキ。15時宿着。</p></div></div>
-            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館 到着</strong></div></div>
-            <div class="day-title">Day 2：沼津の驚異と活気</div>
-            <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>沼津港深海水族館</strong><p>完全室内。シーラカンスなど驚きの体験。大人が楽しめる水族館。</p></div></div>
-            <div class="time-row"><div class="time">14:30</div><div class="desc"><strong>ぬまづみなと</strong><p>屋根付きアーケードで海鮮ランチ。18時頃帰路へ。</p></div></div>
-            <a href="https://www.google.com/maps/dir/西大井駅/伊豆・村の駅+たまご専門店+TAMAGOYA/熱海倶楽部+迎賓館" target="_blank" class="map-btn"><i class="fa-solid fa-map"></i> Googleマップで全行程をナビ</a>
-            <button class="ok-btn" onclick="approvePlan('Plan D')">このプランに決定！</button>
+            <div class="day-title">Day 1：三島の絶品たまごランチ</div>
+            <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>たまご専門店 TAMAGOYA</strong><p>雨の日こそ、室内で絶品たまごランチ＆パンケーキ。15時宿着。<br>
+                <a href="https://izu-tamagoya.com/" target="_blank" class="info-link">TAMAGOYA 公式サイト</a></p></div></div>
+            <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館 到着</strong><p><a href="https://www.atami-club.com/geihinkan/" target="_blank" class="info-link">熱海倶楽部 迎賓館 公式サイト</a></p></div></div>
+            <div class="day-title">Day 2：5/1 沼津・驚異の深海ワールド</div>
+            <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>沼津港深海水族館</strong><p>完全室内。世界初のシーラカンス剥製など大人が夢中になれる水族館。<br>
+                <a href="https://www.numazu-deepsea.com/" target="_blank" class="info-link">深海水族館 公式サイト</a></p></div></div>
+            <div class="time-row"><div class="time">14:30</div><div class="desc"><strong>沼津港 ぬまづみなと</strong><p>屋根付きアーケードで海鮮ランチ。お土産も充実。18時頃帰路へ。<br>
+                <a href="https://numazuminato.com/" target="_blank" class="info-link">沼津港 公式サイト</a></p></div></div>
+            <a href="https://www.google.com/maps/dir/?api=1&origin=西大井駅&destination=熱海倶楽部迎賓館&waypoints=たまご専門店+TAMAGOYA" target="_blank" class="map-btn"><i class="fa-solid fa-route"></i> Googleマップでルートを確認</a>
+            <a href="#" class="ok-btn" onclick="approvePlan('Plan D')">このプランに決定！</a>
         </div></div>
     </div>
 </div>
@@ -182,7 +190,7 @@
         if (!confirm(name + " で決定していいかな？")) return;
         try {
             await fetch(GAS_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({ planName: name }) });
-            alert("決定したよ！最高の記念日にしようね。");
+            alert("決定したよ！最高の記念日にしよう。");
         } catch(e) { alert("決定したよ！準備万端にしておくね。"); }
     }
 
@@ -206,7 +214,7 @@
             setW('w-day1', data[1].timeSeries[0].areas[0].weathers[4], data[1].timeSeries[1].areas[0].tempsMax[4], data[1].timeSeries[1].areas[0].tempsMin[4]);
             setW('w-day2', data[1].timeSeries[0].areas[0].weathers[5], data[1].timeSeries[1].areas[0].tempsMax[5], data[1].timeSeries[1].areas[0].tempsMin[5]);
         } catch (e) {
-            document.getElementById('w-day1').innerText = "雨予報にご注意を";
+            document.getElementById('w-day1').innerText = "大雨予報にご注意を";
             document.getElementById('w-day2').innerText = "雨のち曇り";
         }
     }
