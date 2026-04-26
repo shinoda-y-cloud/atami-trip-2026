@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>20th Anniversary Trip - Atami Club Geihinkan</title>
+    <title>20th Anniversary - Atami Club Geihinkan</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Shippori+Mincho:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -11,51 +11,159 @@
             --gold: #d4af37;
             --main-dark: #1a1a1a;
             --bg: #fdfbf7;
+            --accent-pink: #e91e63;
         }
-        body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg); color: #333; margin: 0; }
+        body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg); color: #333; margin: 0; line-height: 1.8; }
+        
         header {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://www.ataminews.gr.jp/storage/post_picture/[640_640]_20250115115602_FOREST%E2%91%A0.jpg');
-            background-size: cover; background-position: center; height: 60vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; color: white;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://www.city.atami.lg.jp/_res/projects/default_project/_page_/001/002/651/IMG_3414.JPG');
+            background-size: cover; background-position: center; height: 65vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;
+            border-bottom: 5px solid var(--gold);
         }
-        .anniversary-text { font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--gold); margin: 0; }
-        .container { max-width: 800px; margin: -50px auto 50px; padding: 0 20px; }
-        .card { background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 30px; margin-bottom: 30px; border-top: 5px solid var(--gold); }
-        .time-row { display: flex; margin-bottom: 20px; border-left: 2px solid var(--gold); padding-left: 20px; }
-        .time { font-weight: bold; color: var(--gold); min-width: 80px; }
-        .tab-btn { padding: 10px 20px; border-radius: 20px; border: 1px solid #ddd; background: white; cursor: pointer; font-weight: bold; }
-        .tab-btn.active { background: var(--main-dark); color: white; }
+        .anniversary-text { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: var(--gold); margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        header h1 { font-family: 'Shippori Mincho', serif; font-size: 1.8rem; letter-spacing: 0.1em; margin: 10px 0; }
+
+        .container { max-width: 850px; margin: -50px auto 50px; padding: 0 20px; position: relative; z-index: 10; }
+
+        /* Weather Section */
+        .weather-card { background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 25px; margin-bottom: 40px; border-top: 5px solid #3498db; }
+        .weather-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 15px; }
+        .w-item { font-size: 0.9rem; background: #f8f9fa; padding: 15px; border-radius: 10px; }
+        .w-date { font-weight: bold; color: var(--main-dark); display: block; border-bottom: 1px solid #ddd; margin-bottom: 8px; }
+
+        /* Tabs */
+        .tab-container { text-align: center; margin-bottom: 30px; }
+        .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+        .tab-btn {
+            background: white; border: 1px solid #ddd; padding: 10px 15px; border-radius: 25px; cursor: pointer;
+            font-weight: bold; color: #777; transition: 0.3s; font-size: 0.85rem;
+        }
+        .tab-btn.active { background: var(--main-dark); color: white; border-color: var(--main-dark); }
+        .tab-btn.special { border-color: var(--accent-pink); color: var(--accent-pink); }
+        .tab-btn.special.active { background: var(--accent-pink); color: white; }
+
+        /* Plan Cards */
+        .plan-content { display: none; animation: fadeIn 0.5s; }
+        .plan-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        .card-header { background: #f8f8f8; padding: 15px 25px; font-weight: bold; border-left: 5px solid var(--gold); border-bottom: 1px solid #eee; }
+        .card-body { padding: 30px; }
+        
+        .time-row { display: flex; margin-bottom: 20px; border-left: 2px solid #eee; padding-left: 20px; position: relative; }
+        .time-row::before { content: ''; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; position: absolute; left: -6px; top: 10px; }
+        .time { min-width: 80px; font-weight: bold; color: var(--gold); font-family: 'Shippori Mincho', serif; }
+        .desc strong { display: block; font-size: 1.1rem; margin-bottom: 5px; }
+        .desc p { margin: 0; color: #666; font-size: 0.95rem; }
+        
+        .drive-box { background: #f0f3f4; padding: 8px 12px; border-radius: 5px; font-size: 0.85rem; color: #888; margin: 10px 0; display: inline-block; }
+        .map-btn { display: block; background: var(--main-dark); color: white; text-align: center; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 20px; }
+
+        footer { text-align: center; padding: 40px; color: #999; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
 <header>
     <div class="anniversary-text">20th Anniversary</div>
-    <h1 style="font-family:'Shippori Mincho';">熱海倶楽部 迎賓館への旅</h1>
-    <p>2026.04.30 - 05.01 | Luxury Suite Stay</p>
+    <h1>熱海倶楽部 迎賓館への旅</h1>
+    <p>2026.04.30(水) - 05.01(木)</p>
 </header>
 
 <div class="container">
-    <div class="card">
-        <h2 style="font-family:'Shippori Mincho'; color:var(--gold); border-bottom:1px solid #eee; padding-bottom:10px;">
-            Plan J：じゅんワガママ改「ゆとり旅」
-        </h2>
-        <img src="https://www.moaart.or.jp/wp-content/uploads/2025/10/02684105af5aeafe2c6fcda93b72b62b.jpg.webp" style="width:100%; border-radius:10px; margin-bottom:20px;">
-        
-        <div class="time-row">
-            <div class="time">10:00</div>
-            <div class="desc"><strong>自宅 出発</strong><p>カーシェアを借りて、いざ熱海へ！GWの渋滞を音楽で楽しみながら。</p></div>
-        </div>
-        <div class="time-row">
-            <div class="time">12:30</div>
-            <div class="desc"><strong>MOA美術館 ＆ ランチ</strong><p>標高250mからの絶景。館内レストランで優雅に海鮮を味わう。</p></div>
-        </div>
-        <div class="time-row">
-            <div class="time">15:00</div>
-            <div class="desc"><strong>熱海倶楽部 迎賓館 チェックイン</strong><p>70平米のスイート、自家源泉かけ流し半露天風呂。ここからが本当の休日。</p></div>
+    <div class="weather-card">
+        <div style="font-weight:bold; color:#2980b9;"><i class="fa-solid fa-cloud-sun"></i> 天気と服装のヒント</div>
+        <div class="weather-grid">
+            <div class="w-item">
+                <span class="w-date">4/30 (水) 晴れ 18℃/12℃</span>
+                高台の宿は夕方から急に冷え込みます。バルコニーで過ごすなら、<span style="color:var(--accent-pink); font-weight:bold;">厚手のストールや上着</span>を。
+            </div>
+            <div class="w-item">
+                <span class="w-date">5/1 (木) 晴れ 21℃/13℃</span>
+                日差しが強いので、屋外観光なら帽子を。宿の温泉あがりには、リラックスできる薄手の服が最高です。
+            </div>
         </div>
     </div>
+
+    <div class="tab-container">
+        <div class="tabs">
+            <button class="tab-btn special active" onclick="showPlan('planJ', this)">Plan J<br>ワガママ改</button>
+            <button class="tab-btn" onclick="showPlan('planA', this)">Plan A<br>天空ドライブ</button>
+            <button class="tab-btn" onclick="showPlan('planB', this)">Plan B<br>新緑と歴史</button>
+            <button class="tab-btn" onclick="showPlan('planC', this)">Plan C<br>美食の漁港</button>
+            <button class="tab-btn" onclick="showPlan('planD', this)">Plan D<br>三島スイーツ</button>
+        </div>
+    </div>
+
+    <div id="planJ" class="plan-content active">
+        <div class="card">
+            <div class="card-header">Day 1：絶景とアートの贅沢 </div>
+            <div class="card-body">
+                <img src="https://www.moaart.or.jp/wp-content/uploads/2025/10/02684105af5aeafe2c6fcda93b72b62b.jpg.webp" style="width:100%; border-radius:10px; margin-bottom:20px;">
+                <div class="time-row">
+                    <div class="time">10:00</div>
+                    <div class="desc"><strong>自宅 出発</strong><p>GWの渋滞を考慮し、余裕を持って出発。小田原厚木道路経由がスムーズです。</p></div>
+                </div>
+                <div class="time-row">
+                    <div class="time">12:15</div>
+                    <div class="desc"><strong>MOA美術館 ＆ ランチ</strong><p>絶景のメインロビーを堪能。館内のレストランで優雅に海鮮ランチを。滞在3時間。</p>
+                    <div class="drive-box"><i class="fa-solid fa-car"></i> 移動：約10分（宿はすぐそこ！）</div></div>
+                </div>
+                <div class="time-row">
+                    <div class="time">15:15</div>
+                    <div class="desc"><strong>熱海倶楽部 迎賓館 到着</strong><p>全室70平米超のスイートへ。チェックアウトまでお部屋の源泉かけ流し風呂を独占。</p></div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">Day 2：天空のパノラマ </div>
+            <div class="card-body">
+                <div class="time-row">
+                    <div class="time">11:00</div>
+                    <div class="desc"><strong>チェックアウト</strong><p>朝食をゆっくり楽しみ、温泉で締めくくってから出発。</p></div>
+                </div>
+                <div class="time-row">
+                    <div class="time">11:30</div>
+                    <div class="desc"><strong>十国峠 ケーブルカー</strong><p>360度の大パノラマ。富士山と記念撮影。奥様ご希望の空中散歩です。</p></div>
+                </div>
+                <div class="time-row">
+                    <div class="time">14:00</div>
+                    <div class="desc"><strong>熱海城 ＆ 足湯</strong><p>海を見下ろす足湯でリラックス。最後にトリックアートで笑って旅を締めくくり。</p></div>
+                </div>
+                <a href="https://www.google.com/maps/dir/品川/MOA美術館/熱海倶楽部+迎賓館" target="_blank" class="map-btn"><i class="fa-solid fa-map-location-dot"></i> Googleマップでルートを確認</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="planA" class="plan-content">
+        <div class="card"><div class="card-header">Plan A：天空ドライブ</div><div class="card-body"><p>海沿いを避け、ターンパイクや箱根スカイラインを抜けて山から熱海へ入る爽快ルート。十国峠での絶景ランチがメインです。</p></div></div>
+    </div>
+    <div id="planB" class="plan-content">
+        <div class="card"><div class="card-header">Plan B：新緑と歴史</div><div class="card-body"><p>伊豆山神社や起雲閣など、落ち着いた大人の散歩。宿周辺の「伊豆山エリア」を深く知る、静かな癒やしの旅です。</p></div></div>
+    </div>
+    <div id="planC" class="plan-content">
+        <div class="card"><div class="card-header">Plan C：美食の漁港</div><div class="card-body"><p>小田原漁港を経由し、徹底的に「美味い魚」を攻めるプラン。干物の買い出しなど、お土産も充実の美食トリップ。</p></div></div>
+    </div>
+    <div id="planD" class="plan-content">
+        <div class="card"><div class="card-header">Plan D：三島スイーツ</div><div class="card-body"><p>車があるからこそ、三島方面へ！TAMAGOYAのパンケーキと三島スカイウォークを楽しみ、山を越えて熱海へ入ります。</p></div></div>
+    </div>
+
 </div>
+
+<footer>
+    <p>これからも、素敵な時間を重ねていきましょう。<br>Happy 20th Anniversary.</p>
+</footer>
+
+<script>
+    function showPlan(planId, btn) {
+        document.querySelectorAll('.plan-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(planId).classList.add('active');
+        btn.classList.add('active');
+    }
+</script>
 
 </body>
 </html>
