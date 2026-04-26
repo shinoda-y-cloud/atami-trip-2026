@@ -259,22 +259,22 @@
 
     async function loadData() {
         try {
-            // 写真取得
-            const pRes = await fetch(GAS_URL + "?action=getPhotos");
-            const photos = await pRes.json();
-            if(photos.length > 0) {
-                const selected = photos.sort(() => 0.5 - Math.random()).slice(0, 3);
-                document.getElementById('photo-area').innerHTML = selected.map(p => `<div class="polaroid"><img src="${p.url}"></div>`).join('');
+            // GASからのデータ取得を個別にトライする
+            const weatherRes = await fetch(GAS_URL + "?action=getWeather").then(r => r.json());
+            if(weatherRes) {
+                document.getElementById('w-day1').innerText = weatherRes.day1.telop + " (" + weatherRes.day1.temp + ")";
+                document.getElementById('w-day2').innerText = weatherRes.day2.innerText = weatherRes.day2.telop + " (" + weatherRes.day2.temp + ")";
             }
 
-            // 天気取得
-            const wRes = await fetch(GAS_URL + "?action=getWeather");
-            const w = await wRes.json();
-            document.getElementById('w-day1').innerText = w.day1.telop + " (" + w.day1.temp + ")";
-            document.getElementById('w-day2').innerText = w.day2.telop + " (" + w.day2.temp + ")";
+            const photoRes = await fetch(GAS_URL + "?action=getPhotos").then(r => r.json());
+            if(photoRes && photoRes.length > 0) {
+                const selected = photoRes.sort(() => 0.5 - Math.random()).slice(0, 3);
+                document.getElementById('photo-area').innerHTML = selected.map(p => `
+                    <div class="polaroid"><img src="${p.url}" onerror="this.src='https://via.placeholder.com/150?text=Error'"></div>
+                `).join('');
+            }
         } catch (e) {
-            document.getElementById('w-day1').innerText = "晴れの予報です";
-            document.getElementById('w-day2').innerText = "観光日和です";
+            console.error("通信エラー:", e);
         }
     }
     loadData();
