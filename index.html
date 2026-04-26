@@ -10,7 +10,7 @@
         :root { --gold: #d4af37; --main-dark: #1a1a1a; --bg: #fdfbf7; --accent: #e91e63; }
         body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg); color: #333; margin: 0; line-height: 1.8; }
         header {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://www.ataminews.gr.jp/storage/post_picture/[640_640]_20250115115602_FOREST%E2%91%A0.jpg');
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.city.atami.lg.jp/_res/projects/default_project/_page_/001/002/651/IMG_3414.JPG');
             background-size: cover; background-position: center; height: 60vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;
             border-bottom: 5px solid var(--gold);
@@ -19,14 +19,13 @@
         header h1 { font-family: 'Shippori Mincho', serif; font-size: 1.8rem; letter-spacing: 0.1em; margin: 10px 0; }
         .container { max-width: 850px; margin: -50px auto 50px; padding: 0 20px; position: relative; z-index: 10; }
 
-        /* Memory Photos (Polaroid Style) */
+        /* Memory Photos (Polaroid) */
         .photo-gallery { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
         .polaroid {
             background: white; padding: 10px 10px 25px; box-shadow: 0 8px 15px rgba(0,0,0,0.1);
             transform: rotate(-2deg); transition: 0.3s; width: 160px; border: 1px solid #eee;
         }
         .polaroid:nth-child(even) { transform: rotate(2deg); }
-        .polaroid:hover { transform: rotate(0deg) scale(1.1); z-index: 20; }
         .polaroid img { width: 100%; height: 120px; object-fit: cover; }
 
         /* Weather Card */
@@ -40,7 +39,7 @@
         .tab-btn.plan-j { border-color: var(--accent); color: var(--accent); }
         .tab-btn.plan-j.active { background: var(--accent); color: white; }
 
-        /* Content Area */
+        /* Plan Contents */
         .plan-content { display: none; animation: fadeIn 0.6s; }
         .plan-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -49,8 +48,8 @@
         .card-header { background: #f8f8f8; padding: 15px 25px; font-weight: bold; border-left: 5px solid var(--gold); border-bottom: 1px solid #eee; }
         .card-body { padding: 30px; }
         
-        .day-title { font-family: 'Shippori Mincho', serif; color: var(--gold); border-bottom: 1px solid #eee; padding-bottom: 8px; margin: 30px 0 20px; font-size: 1.3rem; }
-        .day-title:first-child { margin-top: 0; }
+        .day-label { display: inline-block; background: var(--main-dark); color: white; padding: 2px 12px; border-radius: 4px; font-size: 0.8rem; margin-bottom: 15px; }
+        .day-title { font-family: 'Shippori Mincho', serif; color: var(--gold); border-bottom: 1px solid #eee; padding-bottom: 8px; margin: 0 0 20px; font-size: 1.4rem; }
 
         .time-row { display: flex; margin-bottom: 20px; border-left: 2px solid var(--gold); padding-left: 20px; position: relative; }
         .time-row::before { content: ''; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; position: absolute; left: -6px; top: 10px; }
@@ -68,9 +67,9 @@
 <body>
 
 <header>
-    <div class="anniversary-text">21st Wedding Anniversary</div>
+    <div class="anniversary-text">21st Anniversary Celebration</div>
     <h1>熱海倶楽部 迎賓館への旅</h1>
-    <p>2026.04.30(水) - 05.01(木)</p>
+    <p>2026.04.30(水) - 05.01(木) | Private Drive</p>
 </header>
 
 <div class="container">
@@ -83,50 +82,30 @@
     <div class="tab-container">
         <div class="tabs">
             <button class="tab-btn plan-j active" onclick="showPlan('planJ', this)">Plan J<br>じゅんワガママ</button>
-            <button class="tab-btn" onclick="showPlan('planA', this)">Plan A<br>天空ドライブ</button>
-            <button class="tab-btn" onclick="showPlan('planB', this)">Plan B<br>新緑と歴史</button>
-            <button class="tab-btn" onclick="showPlan('planC', this)">Plan C<br>美食の漁港</button>
-            <button class="tab-btn" onclick="showPlan('planD', this)">Plan D<br>三島スイーツ</button>
+            <button class="tab-btn" onclick="showPlan('planA', this)">Plan A<br>絶景スカイライン</button>
+            <button class="tab-btn" onclick="showPlan('planB', this)">Plan B<br>歴史・芸術巡り</button>
+            <button class="tab-btn" onclick="showPlan('planC', this)">Plan C<br>地魚・美食三昧</button>
+            <button class="tab-btn" onclick="showPlan('planD', this)">Plan D<br>三島・富士体験</button>
         </div>
     </div>
 
     <div id="planJ" class="plan-content active">
         <div class="card">
-            <div class="card-header">🎀 Plan J：じゅんワガママ改「ゆとり旅」</div>
+            <div class="card-header">Plan J：21年目のスタートを祝う「熱海完全制覇」プラン</div>
             <div class="card-body">
-                <div class="day-title">Day 1：絶景とアートの贅沢</div>
-                <div class="time-row">
-                    <div class="time">10:00</div>
-                    <div class="desc"><strong>自宅 出発</strong><p>GWの渋滞を音楽で楽しみながら、優雅にスタート。</p></div>
-                </div>
-                <div class="time-row">
-                    <div class="time">12:15</div>
-                    <div class="desc"><strong>MOA美術館 ＆ ランチ</strong><p>標高250mからの絶景。館内レストランで3時間、ゆっくりアートと海鮮を堪能。</p>
-                    <div class="drive-info"><i class="fa-solid fa-car"></i> 移動：約10分</div></div>
-                </div>
-                <div class="time-row">
-                    <div class="time">15:15</div>
-                    <div class="desc"><strong>迎賓館チェックイン</strong><p>70平米のスイート、自家源泉かけ流し半露天風呂。ここからが本当の休日。</p></div>
-                </div>
+                <span class="day-label">DAY 1</span>
+                <div class="day-title">初日は「おこもり」の準備</div>
+                <div class="time-row"><div class="time">10:00</div><div class="desc"><strong>自宅 出発</strong><p>お気に入りのプレイリストをMacBook M4 Proで選別して出発！</p></div></div>
+                <div class="time-row"><div class="time">12:15</div><div class="desc"><strong>MOA美術館 ＆ ランチ</strong><p>標高250mの絶景ロビー。館内「オー・ミラドー」等で優雅にランチ。3時間のアート体験。</p></div></div>
+                <div class="time-row"><div class="time">15:15</div><div class="desc"><strong>迎賓館チェックイン</strong><p>早めのチェックイン。翌朝まで自家源泉かけ流しを独占する贅沢。</p></div></div>
 
-                <div class="day-title">Day 2：天空のパノラマと足湯</div>
-                <div class="time-row">
-                    <div class="time">11:00</div>
-                    <div class="desc"><strong>ゆっくりチェックアウト</strong><p>朝風呂を楽しんでから、お昼前に出発。</p></div>
-                </div>
-                <div class="time-row">
-                    <div class="time">11:30</div>
-                    <div class="desc"><strong>十国峠 ケーブルカー</strong><p>360度の大パノラマ。富士山と初夏の爽やかな風を全身で受けます。</p>
-                    <div class="drive-info"><i class="fa-solid fa-car"></i> 移動：約25分</div></div>
-                </div>
-                <div class="time-row">
-                    <div class="time">13:30</div>
-                    <div class="desc"><strong>熱海市街でゆっくりランチ</strong><p>あえて駅周辺を避け、隠れ家的なお店で地魚料理を堪能。</p></div>
-                </div>
-                <div class="time-row">
-                    <div class="time">15:00</div>
-                    <div class="desc"><strong>熱海城 ＆ トリックアート</strong><p>海を見下ろす足湯でリラックスし、写真撮影を楽しんで締めくくり。</p></div>
-                </div>
+                <span class="day-label">DAY 2</span>
+                <div class="day-title">2日目は「動」の熱海を満喫</div>
+                <div class="time-row"><div class="time">11:00</div><div class="desc"><strong>レイトチェックアウト</strong><p>朝食後もひとっ風呂浴びてから、ゆったり出発。</p></div></div>
+                <div class="time-row"><div class="time">11:15</div><div class="desc"><strong>伊豆山神社（いずさんじんじゃ）</strong><p>宿のすぐ隣。強運と縁結びのパワースポットで21年目の安全祈願。</p></div></div>
+                <div class="time-row"><div class="time">12:30</div><div class="desc"><strong>十国峠 ＆ 山頂カフェ</strong><p>ケーブルカーで山頂へ。360度のパノラマと富士山をバックに記念撮影。</p></div></div>
+                <div class="time-row"><div class="time">14:00</div><div class="desc"><strong>熱海銀座 ＆ 食べ歩きランチ</strong><p>車を停めて、昭和レトロな商店街へ。海鮮丼や熱海プリンを堪能。</p></div></div>
+                <div class="time-row"><div class="time">15:30</div><div class="desc"><strong>アカオフォレスト</strong><p>隈研吾設計の絶景カフェ「COEDA HOUSE」でバラの香りと海風に癒やされる。</p></div></div>
                 <button class="ok-btn" onclick="approvePlan('Plan J')"><i class="fa-solid fa-heart"></i> 奥様の承認はこちら</button>
             </div>
         </div>
@@ -134,14 +113,19 @@
 
     <div id="planA" class="plan-content">
         <div class="card">
-            <div class="card-header">Plan A：天空ドライブ ＆ スカイライン</div>
+            <div class="card-header">Plan A：絶景スカイライン ＆ 箱根アプローチ</div>
             <div class="card-body">
-                <div class="day-title">Day 1：山の上からのアプローチ</div>
-                <div class="time-row"><div class="time">12:30</div><div class="desc"><strong>十国峠ランチ</strong><p>山の上で富士山を見ながら開放的なランチ。</p></div></div>
-                <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館チェックイン</strong><p>宿の静寂を楽しみます。</p></div></div>
-                <div class="day-title">Day 2：伊豆スカイライン・新緑ドライブ</div>
-                <div class="time-row"><div class="time">11:00</div><div class="desc"><strong>出発</strong><p>標高の高い稜線を走る絶景ドライブ。新緑が最も美しい季節です。</p></div></div>
-                <div class="time-row"><div class="time">13:00</div><div class="desc"><strong>小田原・早川漁港</strong><p>帰路の途中で立ち寄り、最高のアジフライで旅を締め。お土産も購入。</p></div></div>
+                <span class="day-label">DAY 1</span>
+                <div class="day-title">山からのパノラマドライブ</div>
+                <div class="time-row"><div class="time">12:30</div><div class="desc"><strong>ターンパイク大観山</strong><p>海沿いを避け、標高1000mから富士山を望む。絶景ランチ。</p></div></div>
+                <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館チェックイン</strong><p>山の静寂を楽しみます。</p></div></div>
+
+                <span class="day-label">DAY 2</span>
+                <div class="day-title">箱根を抜ける大自然ルート</div>
+                <div class="time-row"><div class="time">11:00</div><div class="desc"><strong>出発</strong><p>十国峠から箱根方面へ。新緑のドライブ。</p></div></div>
+                <div class="time-row"><div class="time">12:00</div><div class="desc"><strong>箱根 芦ノ湖畔ランチ</strong><p>山のホテルの庭園（ツツジが見頃）や成川美術館を巡る。</p></div></div>
+                <div class="time-row"><div class="time">14:30</div><div class="desc"><strong>大涌谷（おおわくだに）</strong><p>黒たまごを食べて寿命を延ばしましょう。圧巻の火山活動を見学。</p></div></div>
+                <div class="time-row"><div class="time">16:30</div><div class="desc"><strong>御殿場経由で帰路</strong><p>東名高速でスムーズに帰宅。</p></div></div>
                 <button class="ok-btn" onclick="approvePlan('Plan A')">これにする！</button>
             </div>
         </div>
@@ -149,14 +133,17 @@
 
     <div id="planB" class="plan-content">
         <div class="card">
-            <div class="card-header">Plan B：新緑と歴史散歩</div>
+            <div class="card-header">Plan B：大正ロマン ＆ アートに浸る知的休日</div>
             <div class="card-body">
-                <div class="day-title">Day 1：伊豆山の守護神</div>
-                <div class="time-row"><div class="time">13:00</div><div class="desc"><strong>伊豆山神社</strong><p>宿のすぐ隣。源頼朝と政子の縁結びの地をじっくり参拝。</p></div></div>
-                <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館チェックイン</strong><p>歴史の余韻に浸りながら温泉へ。</p></div></div>
-                <div class="day-title">Day 2：大正ロマンと美術館</div>
-                <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>起雲閣（きうんかく）</strong><p>大正・昭和の名建築。美しい庭園を散策しながら当時の文豪に思いを馳せます。</p></div></div>
-                <div class="time-row"><div class="time">14:00</div><div class="desc"><strong>MOA美術館</strong><p>午後の静かな美術館へ。新緑の庭園も散策。ゆっくりとした時間が流れます。</p></div></div>
+                <span class="day-label">DAY 1</span>
+                <div class="day-title">名邸に触れる午後</div>
+                <div class="time-row"><div class="time">13:00</div><div class="desc"><strong>起雲閣（きうんかく）</strong><p>熱海の三大別荘。美しい庭園と大正ロマンの建築美を。15:00に宿へ。</p></div></div>
+                
+                <span class="day-label">DAY 2</span>
+                <div class="day-title">新緑の庭園と国宝巡り</div>
+                <div class="time-row"><div class="time">11:15</div><div class="desc"><strong>MOA美術館（再訪・徹底鑑賞）</strong><p>午前の光が入る美術館へ。国宝『紅白梅図屏風』等の名宝をじっくり。</p></div></div>
+                <div class="time-row"><div class="time">13:30</div><div class="desc"><strong>來宮神社（きのみやじんじゃ）</strong><p>樹齢2100年の大楠。一周すると寿命が延びる伝説。お洒落な茶寮で休憩。</p></div></div>
+                <div class="time-row"><div class="time">15:30</div><div class="desc"><strong>真鶴（まなづる）半島</strong><p>熱海を離れ、原生林の残る真鶴へ。三ツ石を眺めながら静かな海歩き。</p></div></div>
                 <button class="ok-btn" onclick="approvePlan('Plan B')">これにする！</button>
             </div>
         </div>
@@ -164,14 +151,17 @@
 
     <div id="planC" class="plan-content">
         <div class="card">
-            <div class="card-header">Plan C：美食の漁港トリップ</div>
+            <div class="card-header">Plan C：地魚 ＆ 市場巡り！美食トリップ</div>
             <div class="card-body">
-                <div class="day-title">Day 1：徹底的に「美味い魚」を</div>
-                <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>小田原早川漁港ランチ</strong><p>市場直送の海鮮。宿での贅沢食へのプロローグ。</p></div></div>
-                <div class="time-row"><div class="time">15:00</div><div class="desc"><strong>迎賓館チェックイン</strong><p>夕食の海鮮懐石を心ゆくまで。</p></div></div>
-                <div class="day-title">Day 2：真鶴の磯料理と干物</div>
-                <div class="time-row"><div class="time">12:30</div><div class="desc"><strong>真鶴・福浦漁港ランチ</strong><p>観光地化されていない静かな港で、磯料理を堪能。</p></div></div>
-                <div class="time-row"><div class="time">14:30</div><div class="desc"><strong>熱海銀座・干物買い出し</strong><p>「釜鶴」などで、これからの食卓を豊かにする最高の干物を選びます。</p></div></div>
+                <span class="day-label">DAY 1</span>
+                <div class="day-title">漁港直送のランチ</div>
+                <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>小田原早川漁港</strong><p>市場直営の店でアジフライ ＆ 地魚握り。15:00に宿へ。</p></div></div>
+
+                <span class="day-label">DAY 2</span>
+                <div class="day-title">網代・東伊豆の海の幸を攻める</div>
+                <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>網代（あじろ）ランチ</strong><p>熱海の南、網代漁港で金目鯛の煮付けを。漁師の街の味を堪能。</p></div></div>
+                <div class="time-row"><div class="time">13:30</div><div class="desc"><strong>道の駅 伊東マリンタウン</strong><p>カラフルな建物にショップが並ぶ。足湯に浸かりながらショッピング。</p></div></div>
+                <div class="time-row"><div class="time">15:30</div><div class="desc"><strong>福浦漁港（みなと食堂）</strong><p>帰りに真鶴の隠れ家的な漁港で、夕食用に新鮮な魚を仕入れ。</p></div></div>
                 <button class="ok-btn" onclick="approvePlan('Plan C')">これにする！</button>
             </div>
         </div>
@@ -179,14 +169,17 @@
 
     <div id="planD" class="plan-content">
         <div class="card">
-            <div class="card-header">Plan D：三島スイーツ ＆ スカイウォーク</div>
+            <div class="card-header">Plan D：三島スイーツ ＆ 富士のパワー体験</div>
             <div class="card-body">
-                <div class="day-title">Day 1：山を越えて行くスイーツ</div>
-                <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>TAMAGOYA（三島）</strong><p>絶品パンケーキとたまごランチ。車移動の醍醐味。</p></div></div>
-                <div class="time-row"><div class="time">15:30</div><div class="desc"><strong>迎賓館チェックイン</strong><p>スイーツの余韻に浸りながらチェックイン。</p></div></div>
-                <div class="day-title">Day 2：空の散歩と港散策</div>
-                <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>三島スカイウォーク</strong><p>日本最長の吊橋から富士山のパワーをもらいます。</p></div></div>
-                <div class="time-row"><div class="time">14:00</div><div class="desc"><strong>熱海サンビーチ散策</strong><p>初夏の海風を感じながらの散歩。近くで爽やかなジェラートを。</p></div></div>
+                <span class="day-label">DAY 1</span>
+                <div class="day-title">山越えのパンケーキ</div>
+                <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>たまご専門店 TAMAGOYA</strong><p>三島の名店。絶品たまごランチとパンケーキ。15:00に宿へ。</p></div></div>
+
+                <span class="day-label">DAY 2</span>
+                <div class="day-title">空の散歩と水の都</div>
+                <div class="time-row"><div class="time">11:30</div><div class="desc"><strong>三島スカイウォーク</strong><p>日本最長の吊橋。富士山と相模湾のコントラスト。アクティブに散策。</p></div></div>
+                <div class="time-row"><div class="time">14:00</div><div class="desc"><strong>三嶋大社（みしまたいしゃ）</strong><p>伊豆国一の宮。厳かな境内を歩き、名物「福太郎餅」で一服。</p></div></div>
+                <div class="time-row"><div class="time">15:30</div><div class="desc"><strong>楽寿園 ＆ 源兵衛川</strong><p>三島の清流、源兵衛川を散策。水の都の涼やかさを感じて帰路へ。</p></div></div>
                 <button class="ok-btn" onclick="approvePlan('Plan D')">これにする！</button>
             </div>
         </div>
@@ -194,12 +187,12 @@
 </div>
 
 <footer>
-    <p>これからも、素敵な時間を重ねていきましょう。<br>Happy 21st Anniversary.</p>
+    <p>Happy 21st Wedding Anniversary. <br>これからも、素敵な時間を重ねていきましょう。</p>
 </footer>
 
 <script>
-    // 【重要】ここにGASのウェブアプリURLを貼り付けてください
-    const GAS_URL = "あなたのウェブアプリURLをここに";
+    // ※ここにあなたのGASウェブアプリURLを貼ってください
+    const GAS_URL = "あなたのGASウェブアプリURL";
 
     function showPlan(id, btn) {
         document.querySelectorAll('.plan-content').forEach(el => el.classList.remove('active'));
@@ -213,10 +206,9 @@
         try {
             await fetch(GAS_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({ planName: name }) });
             alert("旦那様に通知を送りました！");
-        } catch(e) { alert("通知に失敗しましたが心は届いています！"); }
+        } catch(e) { console.log("Error"); }
     }
 
-    // 写真をランダムに3枚表示
     async function loadMemoryPhotos() {
         try {
             const res = await fetch(GAS_URL + "?action=getPhotos");
@@ -224,10 +216,9 @@
             const selected = photos.sort(() => 0.5 - Math.random()).slice(0, 3);
             const area = document.getElementById('photo-area');
             area.innerHTML = selected.map(p => `<div class="polaroid"><img src="${p.url}"></div>`).join('');
-        } catch (e) { console.log("Photo Error"); }
+        } catch (e) { console.log("Photo load error"); }
     }
 
-    // 最新天気
     async function fetchWeather() {
         try {
             const res = await fetch(GAS_URL + "?action=getWeather");
