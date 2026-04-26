@@ -178,11 +178,18 @@
 
     function loadPhotos() {
         const area = document.getElementById('photo-area');
-        // imagesフォルダの1.jpg〜5.jpgを想定。必要に応じて数字を調整
-        const photoNumbers = [1, 2, 3, 4, 5];
+        
+        // 1から24までの数字を自動で作成します
+        const totalPhotos = 24; 
+        const photoNumbers = Array.from({length: totalPhotos}, (_, i) => i + 1);
+        
+        // 全24枚の中からランダムに3枚をピックアップ
         const selected = photoNumbers.sort(() => 0.5 - Math.random()).slice(0, 3);
+        
         area.innerHTML = selected.map(num => `
-            <div class="polaroid"><img src="images/${num}.jpg" onerror="this.src='https://via.placeholder.com/150?text=Error'"></div>
+            <div class="polaroid">
+                <img src="images/${num}.jpg" onerror="console.log('${num}.jpgが見つかりません'); this.parentElement.style.display='none';">
+            </div>
         `).join('');
     }
 
